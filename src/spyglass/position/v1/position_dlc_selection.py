@@ -127,7 +127,6 @@ class DLCPosV1(dj.Computed):
         from ..position_merge import PositionOutput
 
         self.insert1(key)
-        PositionOutput().insert1(orig_key, skip_duplicates=True)
 
     def fetch_nwb(self, *attrs, **kwargs):
         return fetch_nwb(

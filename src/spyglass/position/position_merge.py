@@ -189,9 +189,7 @@ class PositionVideo(dj.Computed):
             # CBroz: I was told only tests should `assert`, code should `raise`
 
         M_TO_CM = 100
-        output_dir = (PositionVideoSelection & key).fetch1(
-            "output_dir"
-        )
+        output_dir = (PositionVideoSelection & key).fetch1("output_dir")
 
         print("Loading position data...")
         # raw_position_df = (
@@ -278,9 +276,7 @@ class PositionVideo(dj.Computed):
         video_frame_col_name = [
             col for col in pos_df.columns if "video_frame_ind" in col
         ][0]
-        video_frame_inds = (
-            pos_df[video_frame_col_name].astype(int).to_numpy()
-        )
+        video_frame_inds = pos_df[video_frame_col_name].astype(int).to_numpy()
         if plot in ["DLC", "All"]:
             video_path = (
                 DLCPoseEstimationSelection
@@ -307,10 +303,10 @@ class PositionVideo(dj.Computed):
             video_frame_inds,
             position_mean_dict,
             video_time,
-            np.asarray(pos_df.index)
+            np.asarray(pos_df.index),
             processor="opencv",
             output_video_filename=output_video_filename,
-            cm_to_pixels= meters_per_pixel * M_TO_CM
+            cm_to_pixels=meters_per_pixel * M_TO_CM,
             disable_progressbar=False,
         )
         self.insert1(key)
